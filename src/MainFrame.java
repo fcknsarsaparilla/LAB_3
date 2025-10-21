@@ -165,6 +165,7 @@ public class MainFrame extends JFrame {
                     data = new GornerTableModel(from, to, step, MainFrame.this.coefficients);
                     JTable table = new JTable(data);
                     table.setDefaultRenderer(Double.class, renderer);
+                    table.setDefaultRenderer(Boolean.class, renderer);
                     table.setRowHeight(30);
 
                     hBoxResult.removeAll();
