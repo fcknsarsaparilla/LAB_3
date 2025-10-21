@@ -28,37 +28,65 @@ public class GornerTableModel extends AbstractTableModel {
     }
 
     public int getColumnCount() {
-        return 2;
+        // Теперь три столбца
+        return 3;
     }
 
     public int getRowCount() {
-        return Integer.valueOf(Double.valueOf(Math.ceil((to - from) / step)).intValue() + 1);
+        return (int) Math.ceil((to - from) / step) + 1;
     }
 
     public Object getValueAt(int row, int col) {
         double x = from + step * row;
         if (col == 0) {
             return x;
-        } else {
+        } else if (col == 1) {
             // Horner's scheme implementation
             Double result = coefficients[0];
             for (int i = 1; i < coefficients.length; i++) {
                 result = result * x + coefficients[i];
             }
             return result;
+        } else { // col == 2
+            Double result = coefficients[0];
+            for (int i = 1; i < coefficients.length; i++) {
+                result = result * x + coefficients[i];
+            }
+
+            int intPart = result.intValue();
+            return isSquare(intPart);
         }
+    }
+
+    private Boolean isSquare(int number) {
+        if (number < 0) return false;
+        int sqrt = (int) Math.sqrt(number);
+        return sqrt * sqrt == number;
     }
 
     public String getColumnName(int col) {
         switch (col) {
             case 0:
                 return "Value X";
-            default:
+            case 1:
                 return "Polynomial Value";
+            case 2:
+                return "Is integer part a square?";
+            default:
+                return "";
         }
     }
 
     public Class<?> getColumnClass(int col) {
-        return Double.class;
+        switch (col) {
+            case 0:
+                return Double.class;
+            case 1:
+                return Double.class;
+            case 2:
+                return Boolean.class;
+            default:
+                return Object.class;
+        }
     }
 }
