@@ -65,6 +65,9 @@ public class MainFrame extends JFrame {
         JMenu tableMenu = new JMenu("Table");
         menuBar.add(tableMenu);
 
+        JMenu helpMenu = new JMenu("Help");
+        menuBar.add(helpMenu);
+
         // Save to text file action
         Action saveToTextAction = new AbstractAction("Save to text file") {
             public void actionPerformed(ActionEvent event) {
@@ -103,6 +106,14 @@ public class MainFrame extends JFrame {
                 renderer.setNeedle(value);
                 getContentPane().repaint();
             }
+
+            Action aboutAction = new AbstractAction("About") {
+                public void actionPerformed(ActionEvent event) {
+                    showAboutDialog();
+                }
+            };
+            JMenuItem aboutMenuItem = helpMenu.add(aboutAction);
+
         };
         searchValueMenuItem = tableMenu.add(searchValueAction);
         searchValueMenuItem.setEnabled(false);
@@ -187,6 +198,7 @@ public class MainFrame extends JFrame {
             }
         });
 
+
         Box hboxButtons = Box.createHorizontalBox();
         hboxButtons.setBorder(BorderFactory.createBevelBorder(1));
         hboxButtons.add(Box.createHorizontalGlue());
@@ -204,6 +216,12 @@ public class MainFrame extends JFrame {
         hBoxResult = Box.createHorizontalBox();
         hBoxResult.add(new JPanel());
         getContentPane().add(hBoxResult, BorderLayout.CENTER);
+    }
+
+    private void showAboutDialog() {
+        String aboutMessage = "Author: Yegor" + "Group: 10";
+                JOptionPane.showMessageDialog(this, aboutMessage,
+                        "About Program", JOptionPane.INFORMATION_MESSAGE);
     }
 
     protected void saveToGraphicsFile(File selectedFile) {
