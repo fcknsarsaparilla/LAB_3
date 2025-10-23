@@ -254,7 +254,7 @@ public class MainFrame extends JFrame {
             out.println("====================================================");
 
             for (int i = 0; i < data.getRowCount(); i++) {
-                out.println("Value at point " + data.getValueAt(i, 0) +
+                out.println("Value at point " + data.getPolinomValue(i).toString() +
                         " is " + data.getValueAt(i, 1));
             }
             out.close();

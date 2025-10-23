@@ -1,5 +1,6 @@
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class GornerTableModel extends AbstractTableModel {
@@ -7,12 +8,19 @@ public class GornerTableModel extends AbstractTableModel {
     private Double from;
     private Double to;
     private Double step;
+    private ArrayList<Double> PolinomValues = new ArrayList<>();
 
     public GornerTableModel(Double from, Double to, Double step, Double[] coefficients) {
         this.from = from;
         this.to = to;
         this.step = step;
         this.coefficients = coefficients;
+    }
+
+    public Double getPolinomValue(int i){
+        if (PolinomValues != null)
+            return PolinomValues.get(i);
+        return 0.0;
     }
 
     public Double getFrom() {
@@ -55,7 +63,7 @@ public class GornerTableModel extends AbstractTableModel {
                 for (int i = 1; i < coefficients.length; i++) {
                     result = result * x + coefficients[i];
                 }
-
+                PolinomValues.add(result);
                 int intPart = result.intValue();
                 return isSquare(intPart);
             }
