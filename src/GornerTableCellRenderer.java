@@ -40,11 +40,7 @@ public class GornerTableCellRenderer implements TableCellRenderer {
             checkBox.setSelected((Boolean) value);
 
             // Установка цвета фона
-            if (isSelected) {
-                checkBox.setBackground(table.getSelectionBackground());
-            } else {
-                checkBox.setBackground(table.getBackground());
-            }
+               checkBox.setBackground(isSelected? table.getSelectionBackground() : table.getBackground());
 
             return checkBox;
         } else {
