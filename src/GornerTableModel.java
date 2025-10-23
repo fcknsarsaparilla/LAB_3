@@ -38,23 +38,27 @@ public class GornerTableModel extends AbstractTableModel {
 
     public Object getValueAt(int row, int col) {
         double x = from + step * row;
-        if (col == 0) {
-            return x;
-        } else if (col == 1) {
-            // Horner's scheme implementation
-            Double result = coefficients[0];
-            for (int i = 1; i < coefficients.length; i++) {
-                result = result * x + coefficients[i];
+        switch (col) {
+            case 0 -> {
+                return x;
             }
-            return result;
-        } else { // col == 2
-            Double result = coefficients[0];
-            for (int i = 1; i < coefficients.length; i++) {
-                result = result * x + coefficients[i];
+            case 1 -> {
+                // Horner's scheme implementation
+                Double result = coefficients[0];
+                for (int i = 1; i < coefficients.length; i++) {
+                    result = result * x + coefficients[i];
+                }
+                return result;
             }
+            default -> { // col == 2
+                Double result = coefficients[0];
+                for (int i = 1; i < coefficients.length; i++) {
+                    result = result * x + coefficients[i];
+                }
 
-            int intPart = result.intValue();
-            return isSquare(intPart);
+                int intPart = result.intValue();
+                return isSquare(intPart);
+            }
         }
     }
 
